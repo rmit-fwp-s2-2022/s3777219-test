@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "pilcrow";
+  src: url("../src/Font/Foundry-Pilcrow.otf");
+}
+body {
+  margin: 0;
+  font-family: 'pilcrow';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+ul{
+  list-style: none;
+}
+
