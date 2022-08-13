@@ -4,6 +4,7 @@ import Services from "./Components/Services";
 import Signin from "./Components/Signin";
 import Footer from "./Components/Footer";
 import Signup from "./Components/Signup";
+import Dashboard from "./Components/Dashboard";
 import React, { useState } from "react";
 
 import {
@@ -72,7 +73,10 @@ function App() {
               </>
             }
           ></Route>
-        </Routes>
+       <Route exact path="/dashboard" element={<Dashboard/>}>
+ </Route>
+
+        </Routes>      
         <Footer />
       </BrowserRouter>
     </div>

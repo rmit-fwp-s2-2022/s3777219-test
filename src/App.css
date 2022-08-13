@@ -93,3 +93,10 @@ background: linear-gradient(to right, #A74240 0%, #ae5279 100%);
     justify-content: space-between;
 }
 }
+.avatar{
+  border-radius: 35px;
+}
+.addPost{
+  width: 15%;
+  border-radius: 50px;
+}
