@@ -56,4 +56,6 @@ async function seedData() {
   });
 }
 
+
+
 module.exports = db;

@@ -3,13 +3,15 @@ module.exports = (express, app) => {
   const router = express.Router();
 
   // Add routes to server.
-  app.use("/api/posts", router);
+  app.use("/api/users", router);
 
-  app.route("/user").get(userController.all).post(userController.create);
-
-  // Select a single user with id.
-  app.get("/user/select/:id", userController.one);
+  // router.route("/user").get(userController.all).post(userController.create);
+  // Create user
+  router.post("/createUser", userController.createUser);
 
   // Select one user from the database if username and password are a match.
-  app.get("/user/login", userController.login);
+  router.post("/login", userController.login);
+
+  // Select a single user with id.
+  router.get("/getUserById/:id", userController.getUserById);
 };
