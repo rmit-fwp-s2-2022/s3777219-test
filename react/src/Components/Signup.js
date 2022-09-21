@@ -38,29 +38,29 @@ export default function Signup() {
       username: username,
       email: email,
       password: password,
-      firstname: "test",
-      lastname: "test",
       createdAt: formattedToday,
     };
+
     const nameField = document.getElementById("username");
     const emailField = document.getElementById("email");
     const passwordField = document.getElementById("password");
     const fieldsArray = [nameField, emailField, passwordField];
-    const res = await axios.get(
-      `http://localhost:4000/user?email=${newAccount.email}`
-    );
-    let data = res.data;
+    // const res = await axios.post(
+    //   `http://localhost:4000/api/posts/user?email=${newAccount.email}`
+    // );
+    // console.log("res: ", res);
+    // let data = res.data;
 
-    // Check if email existed
-    if (!(data === null)) {
-      MySwal.fire({
-        icon: "error",
-        title: `Can't Register`,
-        text: "A user with this Email Exists!",
-      });
+    // // Check if email existed
+    // if (!(data === null)) {
+    //   MySwal.fire({
+    //     icon: "error",
+    //     title: `Can't Register`,
+    //     text: "A user with this Email Exists!",
+    //   });
 
-      return 0;
-    }
+    //   return 0;
+    // }
 
     // Check fields are typed in
     for (let j = 0; j < fieldsArray.length; j++) {
@@ -83,9 +83,7 @@ export default function Signup() {
     for (let i = 1; i <= 2; i++) {
       // eslint-disable-next-line
       if (
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-          fieldsArray[1].value
-        )
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(fieldsArray[1].value)
       ) {
         fieldsArray[1].style.borderColor = "#ced4da";
         $("#" + fieldsArray[1].id)
@@ -112,12 +110,13 @@ export default function Signup() {
           .remove();
         if (i === 2) {
           // try create new user
-          const createRes = await axios.post(
-            "http://localhost:4000/user",
-            newAccount
-          );
-
-          if (createRes.status === 200) {
+          try {
+            console.log("before posting request");
+            const createRes = await axios.post(
+              "http://localhost:4000/api/users/createUser",
+              newAccount
+            );
+            console.log("after posting request", createRes);
             MySwal.fire(
               "Successfully Registered!",
               "Welcome to LOOP AGILE NOW Team!",
@@ -125,8 +124,12 @@ export default function Signup() {
             );
 
             history("/signin");
-          } else {
-            console.log("Can not create new user");
+          } catch (err) {
+            MySwal.fire({
+              icon: "error",
+              title: `Can't Register`,
+              text: "A user with this Email Exists!",
+            });
           }
         }
       } else {

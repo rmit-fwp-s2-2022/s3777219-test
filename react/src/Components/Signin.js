@@ -1,90 +1,119 @@
-
 import React from "react";
 import { useState } from "react";
-import $ from 'jquery';
-import Swal from 'sweetalert2'
+import $ from "jquery";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import withReactContent from 'sweetalert2-react-content'
+import withReactContent from "sweetalert2-react-content";
 import logo from "../images/logo.svg";
 const MySwal = withReactContent(Swal);
+const axios = require("axios").default;
 // import { verifyUser, initUsers } from "../LocalStorage/LocalStorage";
 
 export default function Signin(props) {
   const history = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const addData = (e) => {
+  const addData = async (e) => {
     e.preventDefault();
-    const getuseArr = localStorage.getItem("USERKEY");
-    const emailField = document.getElementById('email');
-    const passwordField = document.getElementById('password');
+
+    const emailField = document.getElementById("email");
+    const passwordField = document.getElementById("password");
     const fieldsArray = [emailField, passwordField];
-    for (let j = 0; j < fieldsArray.length; j++){
-      if(fieldsArray[j].value === '' ){
-          fieldsArray[j].style.borderColor = 'red'
-          $('#'+fieldsArray[j].id).next('p').remove();
-          $( "<p id ='errorMsg' style = 'color: red;'>This Value Is Required</p>" ).insertAfter( fieldsArray[j] );
-         }
-         else
-         {
-          fieldsArray[j].style.borderColor = '#ced4da'
-          $('#'+fieldsArray[j].id).next('p').remove();
-         }
+    for (let j = 0; j < fieldsArray.length; j++) {
+      if (fieldsArray[j].value === "") {
+        fieldsArray[j].style.borderColor = "red";
+        $("#" + fieldsArray[j].id)
+          .next("p")
+          .remove();
+        $(
+          "<p id ='errorMsg' style = 'color: red;'>This Value Is Required</p>"
+        ).insertAfter(fieldsArray[j]);
+      } else {
+        fieldsArray[j].style.borderColor = "#ced4da";
+        $("#" + fieldsArray[j].id)
+          .next("p")
+          .remove();
       }
-     
-  for (let i = 0; i <= 1; i++) {
-          // eslint-disable-next-line
-          if ( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(fieldsArray[0].value))
-          {
-              fieldsArray[0].style.borderColor = '#ced4da'
-          $('#'+fieldsArray[0].id).next('p').remove();
-          }
-          else{
-              fieldsArray[0].style.borderColor = 'red'
-              $('#'+fieldsArray[0].id).next('p').remove();
-              $( "<p id ='errorMsg' style = 'color: red;'>Invalid Format</p>" ).insertAfter( fieldsArray[0] );
+    }
+
+    for (let i = 0; i <= 1; i++) {
+      // eslint-disable-next-line
+      if (
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+          fieldsArray[0].value
+        )
+      ) {
+        fieldsArray[0].style.borderColor = "#ced4da";
+        $("#" + fieldsArray[0].id)
+          .next("p")
+          .remove();
+      } else {
+        fieldsArray[0].style.borderColor = "red";
+        $("#" + fieldsArray[0].id)
+          .next("p")
+          .remove();
+        $(
+          "<p id ='errorMsg' style = 'color: red;'>Invalid Format</p>"
+        ).insertAfter(fieldsArray[0]);
+        return 0;
+      }
+      if (
+        /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(
+          fieldsArray[1].value
+        )
+      ) {
+        fieldsArray[1].style.borderColor = "#ced4da";
+        $("#" + fieldsArray[1].id)
+          .next("p")
+          .remove();
+        if (i === 1) {
+          const loginAccount = {
+            email: emailField.value,
+            password: passwordField.value,
+          };
+          try {
+            const userData = await axios.post(
+              "http://localhost:4000/api/users/login",
+              loginAccount
+            );
+            console.log("userdata: ", userData);
+            if (userData?.data) {
+              MySwal.fire(
+                "Successfully LoggedIn!",
+                "Welcome to LOOP AGILE NOW Dashboard!",
+                "success"
+              );
+              localStorage.setItem("user_login", JSON.stringify(userData.data));
+              history("/dashboard");
+              console.log(userData);
+            } else {
+              MySwal.fire({
+                icon: "error",
+                title: `Wrong Credentials`,
+                text: "Try Credentials Again!",
+              });
               return 0;
+            }
+          } catch (error) {
+            MySwal.fire({
+              icon: "error",
+              title: `Wrong Credentials`,
+              text: "Try Credentials Again!",
+            });
+            return 0;
           }
-          if(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(fieldsArray[1].value))
-          {
-             
-              fieldsArray[1].style.borderColor = '#ced4da'
-              $('#'+fieldsArray[1].id).next('p').remove();
-              if(i===1){
-                const userdata = JSON.parse(getuseArr);
-                if (userdata && userdata.length) {
-                  const userlogin = userdata.filter((user) => {
-                    return user.email === email && user.password === password;
-                  });
-                  if (userlogin.length === 0) {
-                    MySwal.fire({
-                      icon: 'error',
-                      title: `Wrong Credentials`,
-                      text: 'Try Credentials Again!'
-                    })
-                    return 0;
-                  } else {
-                    MySwal.fire(
-                      'Successfully LoggedIn!',
-                      'Welcome to LOOP AGILE NOW Dashboard!',
-                      'success'
-                    )
-                    localStorage.setItem("user_login", JSON.stringify(userlogin));
-                    history("/dashboard");
-                  }
-                }
-                   
-              }
-          }
-          else{
-              fieldsArray[1].style.borderColor = 'red'
-              $('#'+fieldsArray[1].id).next('p').remove();
-              $( "<p id ='errorMsg' style = 'color: red;'>Try Strong Password</p>" ).insertAfter( fieldsArray[1] );
-              return 0;
-          }
-  
-  
-  } 
+        }
+      } else {
+        fieldsArray[1].style.borderColor = "red";
+        $("#" + fieldsArray[1].id)
+          .next("p")
+          .remove();
+        $(
+          "<p id ='errorMsg' style = 'color: red;'>Try Strong Password</p>"
+        ).insertAfter(fieldsArray[1]);
+        return 0;
+      }
+    }
   };
 
   return (

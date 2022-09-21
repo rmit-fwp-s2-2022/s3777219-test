@@ -5,21 +5,28 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 ///////////////////////////////////////////
 
-const axios = require("axios").default;
+const axios = require("axios");
 async function test() {
-  const res = await axios.post("http://localhost:4000/user", {
-    email: "te3st@gmail.com",
-    username: "hello1",
-    password: "passwordtest1",
-    firstname: "nguyen1",
-    lastname: "phan1",
-  });
-  if (res.status === 200) {
-    console.log(res.data);
+  try {
+    const res = await axios.post(
+      "http://localhost:4000/api/posts/user/createUser",
+      {
+        email: "j204u20jn@gmail.com",
+        username: "fejwfj2009ljc",
+        password: "passwordtest1",
+        firstname: "fwjfjwoi",
+        lastname: "-9wrfops",
+      }
+    );
+  } catch (err) {
+    console.log(err);
   }
+  // if (res.status === 200) {
+  //   console.log(res.data);
+  // }
 }
 
-test();
+// test();
 
 /////////////////////
 const root = ReactDOM.createRoot(document.getElementById("root"));
