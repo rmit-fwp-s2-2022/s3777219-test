@@ -1,0 +1,132 @@
+h1,h2,h3,h4,h5,h6,nav,button{
+    z-index: 100;
+}
+.more{
+    width: 30%;
+}
+.more-row{
+    padding-bottom: 16%;
+    margin-left: 4px;
+}
+.logo{
+    width: 250px;
+    height: 80px;
+}
+.nav-item a{
+    font-size: 18px;
+}
+.colored-text{
+    background: #A74240;
+background: linear-gradient(to right, #A74240 0%, #ae5279 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+}
+
+.post-image{
+  border: 2px solid white;
+  border-radius: 10px;
+}
+@media screen and (min-width: 500px) {
+.post-image{
+  margin-left: -25px !important;
+}
+.post-col{
+  max-height: 270px;
+}
+}
+.post-row{
+  background: linear-gradient(to right, #A74240 0%, #ae5279 100%);
+  border-radius: 60px;
+  padding: 7px 0px;
+}
+.post-col{
+  background: linear-gradient(to right, #A74240 0%, #ae5279 100%);
+  border-radius: 60px;
+  padding: 7px 0px;
+}
+.copy-right{
+    background-color : rgba(0, 0, 0, 0.2);
+}
+.wrapper{
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+.home-page{
+  background-image: url("images/header.png");
+}
+.form-control:focus{
+  box-shadow: none;
+  border-color: black;
+}
+.signin-page{
+  background-image: url("images/account.png");
+}
+.card{
+  border-radius: 20px !important;
+}
+.nav-col{
+    background-color: transparent !important;
+}
+.card-section{
+    float: left;
+}
+.card-title{
+    font-size: 22px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  .card-title:hover{
+    color: #c1282a !important;
+  }
+  .card-text{
+    line-height: 1.625;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .card-body{
+    padding-right: 7px;
+      padding-left: 7px;
+      cursor: pointer;
+    }
+  .card{
+    border: 1px solid #ededed;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 76px rgb(0 0 0 / 8%);
+    
+    /* box-shadow: 0 0 76px rgb(0 0 0 / 10%); */
+   
+  }
+  .slide-col{
+    background-color: #cccccc1c;
+  }
+  .card-container{
+    margin-top: 12% !important;
+    margin-bottom: 5% ;
+  }
+  .carousel-inner{
+    -webkit-box-shadow: 0 0 76px rgb(0 0 0 / 10%);
+  }
+  
+  
+@media (min-width: 992px){
+.navbar-expand-lg .navbar-collapse {
+    justify-content: space-between;
+}
+}
+.swal2-styled.swal2-confirm {
+background-image:  linear-gradient(to right, #A74240 0%, #ae5279 100%) !important;
+}
+.avatar{
+  border-radius: 35px;
+}
+.addPost{
+  width: 15%;
+  border-radius: 50px;
+}
+.swal2-html-container {
+
+  line-height: unset !important;
+}
