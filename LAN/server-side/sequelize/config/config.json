@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "s3821922",
+    "password": "abc123",
+    "database": "s3821922",
+    "host": "rmit.australiaeast.cloudapp.azure.com",
+    "port": "3306",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "s3821922",
+    "password": "abc123",
+    "database": "s3821922",
+    "host": "rmit.australiaeast.cloudapp.azure.com",
+    "port": "3306",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "s3821922",
+    "password": "abc123",
+    "database": "s3821922",
+    "host": "rmit.australiaeast.cloudapp.azure.com",
+    "port": "3306",
+    "dialect": "mysql"
+  }
+}

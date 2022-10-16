@@ -1,0 +1,12 @@
+const { Router } = require("express");
+const userRoutes = require("./user.routes");
+const adminRoutes = require("./admin");
+const postRoutes = require("./post.routes");
+const commentRoutes = require("./comment.routes");
+const router = Router();
+console.log("Router is working");
+router.use("/user", userRoutes);
+router.use("/admin", adminRoutes);
+router.use("/post", postRoutes);
+router.use("/comment", commentRoutes);
+module.exports = router;
